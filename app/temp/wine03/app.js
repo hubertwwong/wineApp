@@ -5,6 +5,8 @@
 
 // init the wine app.
 //$(document).ready(function() {
+
+console.log('adding some test wines.');
 	
 // add some wine objects.
 app.Models.firstWine = new app.CModels.Wine({
@@ -12,7 +14,7 @@ app.Models.firstWine = new app.CModels.Wine({
 });
 
 app.Models.secondWine = new app.CModels.Wine({
-	 name : '3 buck ted'
+	 name : '3 buck chuck'
 });
 
 // this is the actual collection.
@@ -25,6 +27,6 @@ app.Collections.wines.add(app.Models.secondWine);
 // app view.
 // =======================================================================
 app.Views.wineView = new app.CViews.WineView({collection: app.Collections.wines});
-app.Views.wineInput = new app.CViews.WineInput();
+app.Views.wineInput = new app.CViews.WineInput({collection: app.Collections.wines});
 	
 //}); 

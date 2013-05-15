@@ -17,13 +17,13 @@ app.CViews.WineView = Backbone.View.extend({
 		//this.listenTo(this.model, 'change', this.render);
 		
 		// seeing the collection.
-		console.log(this.collection);
-		if (this.collection !== undefined) {
-			console.log("ddddefined");
-		}
-		else {
-			console.log("notdefined");
-		}
+		//console.log(this.collection);
+		//if (this.collection !== undefined) {
+		//	console.log("ddddefined");
+		//}
+		//else {
+		//	console.log("notdefined");
+		//}
 		
 		// render call the render function.
 		this.render();
@@ -44,7 +44,7 @@ app.CViews.WineView = Backbone.View.extend({
 	renderCollection : function (aCollection, elem) {
 		aCollection.each( function(model) {
 			elem.append('<li>' + model.get('name') + '</li>');
-			console.log(model.get('name')); 
+			//console.log(model.get('name')); 
 		});
 	}
 });

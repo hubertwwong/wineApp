@@ -2,6 +2,7 @@
  * wine input
  * - handles the input to insert new wines.
  *
+ * this.collection is the wine collection.
  * */
 app.CViews.WineInput = Backbone.View.extend({
 	el: 'input',
@@ -18,9 +19,14 @@ app.CViews.WineInput = Backbone.View.extend({
 		return this;
 	},
 	addWineItem : function(e) {
-		// check....
+		// check for enter. if its not that, just return.
+		// otherwise, this function will just keep triggering.
 		if (e.keyCode != 13) return;
-        //this.input = this.$('.edit');
-		console.log($(e.target).val());
+        
+        // adds to 
+        this.collection.add(new app.CModels.Wine({name: $(e.target).val()}));
+        
+        // pulling input.
+		console.log('adding ' + $(e.target).val());
 	}
 });
