@@ -5,8 +5,6 @@
  * this.collection is the wine collection.
  * */
 app.CViews.WineInput = Backbone.View.extend({
-	el: 'input',
-	id: 'wineInput',
 	initialize : function() {
 		// render call the render function.
 		this.render();

@@ -26,7 +26,15 @@ app.Collections.wines.add(app.Models.secondWine);
 
 // app view.
 // =======================================================================
-app.Views.wineView = new app.CViews.WineView({collection: app.Collections.wines});
-app.Views.wineInput = new app.CViews.WineInput({collection: app.Collections.wines});
+app.Views.wineView = new app.CViews.WineView({
+	collection: app.Collections.wines,
+	el: 'ul',
+	id: 'wineList'
+});
+app.Views.wineInput = new app.CViews.WineInput({
+	collection: app.Collections.wines,
+	el: 'input',
+	id: 'wineInput'
+});
 	
 //}); 

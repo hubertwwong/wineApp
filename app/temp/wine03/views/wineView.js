@@ -6,8 +6,6 @@
  * - need to pass a {collection: collectionObj} when you init the object.
  * */
 app.CViews.WineView = Backbone.View.extend({
-	el: 'ul',
-	id: 'wineList',
 	initialize : function() {
 		
 		// event listeners
