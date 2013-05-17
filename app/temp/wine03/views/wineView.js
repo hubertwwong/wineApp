@@ -11,6 +11,8 @@ app.CViews.WineView = Backbone.View.extend({
 		// event listeners
 		this.collection.on('add remove', this.render, this);
 		
+		// need to add something here to bind multiple event listeners.
+		
 		// this.listenTo();
 		//this.listenTo(this.model, 'change', this.render);
 		

@@ -1,8 +1,3 @@
-<!--
-	a slight better version of v2.
-	move the 'console' helper stuff to a sperate file.
--->
-
 <html>
 
 <head>
@@ -10,19 +5,20 @@
 </head>
 
 <body>
-	<!-- config panel. -->
-	<div id="config">
-		<form>
-	  		<h3>tweet:</h3>
-	  		<input type="text" cols="50" id="tweetInput"/>
+	<!-- 
+		this stuff will get modify by backbone js.
+		wineInputDiv will add whatever you input into a collection.
+		wineList is displaying the collection. 
+	-->
+	<div id="wineInputDiv">
+		<!-- setting the action=# since we dont' have a server-->
+		<form action="#">
+	  		<input type="text" cols="50" id="wineInput"/>
 	  	</form>
 	</div>
-	<div>
-		<form>
-			<h3>recent tweet:</h3>
-			<textarea rows="4" cols="50" id="tweetOutput">	
-			</textarea>
-		</form>
+	<div id="wineList">
+		<h3>wines</h3>
+		<ul id="wines"></ul>
 	</div>
 	
 	<!-- 
@@ -31,6 +27,7 @@
 	<script type="text/javascript" src="../../../lib/jquery-2.0.0.min.js"></script>
 	<script type="text/javascript" src="../../../lib/underscore-min.js"></script>
 	<script type="text/javascript" src="../../../lib/backbone-min.js"></script>
+	<script type="text/javascript" src="../../../lib/handlebars.js"></script>
 	
 	<!--
 		your stuff...
@@ -39,6 +36,7 @@
 	<script type="text/javascript" src="models/wine.js"></script>
 	<script type="text/javascript" src="collections/wines.js"></script>
 	<script type="text/javascript" src="views/wineView.js"></script>
+	<script type="text/javascript" src="views/wineInput.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </body>
 
