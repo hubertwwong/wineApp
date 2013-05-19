@@ -38,6 +38,9 @@ app.CViews.WineView = Backbone.View.extend({
 		this.$el.empty();
 		this.renderCollection(this.collection, this.$el);
 		
+		// load template.
+		this.renderTemplate(this.collection);
+		
 		// if you return this, you can chain views.
 		return this;
 	},
@@ -58,11 +61,23 @@ app.CViews.WineView = Backbone.View.extend({
 		});
 	},
 	
-	// event helpers.
-	// =======================================================================
+	renderTemplate : function(aCollection) {
+		// fetch the template from html file.
+		var src = $('#wineListTemplate').html();
+		console.log(src);
+		
+		// compile said template.
+		var template = Handlebars.compile(src);
+		console.log(aCollection.toJSON());
+		
+		// pass the compiled template with the data.
+		var result = template(aCollection.toJSON());
+		console.log(result);
+		
+		// update the results.
+		// hard code the results for now...
+		// change it later.
+		$('#wineOutputCollection').html(result);
+	}
 	
-	// delete a wine fro the collection.
-	//wineDelete : function (e) {
-	//	console.log(e.currentTarget.id);
-	//}
 });

@@ -21,6 +21,31 @@
 		<ul id="wines"></ul>
 	</div>
 	
+	<!--
+		handle bars test.
+	-->
+	<script id="header1" type="text/x-handlebars-template">
+ 		<p>Hello, my name is {{name}}. I am from {{hometown}}. I have {{kids.length}} kids:</p>
+ 		
+ 		<ul>{{#kids}}
+    			<li>{{name}} is {{age}}</li>
+    		{{/kids}}</ul>
+    	</script>
+	
+    	
+    	<!-- 
+    		winelist with handlebars template.
+    	-->
+	<script id="wineListTemplate" type="text/x-handlebars-template">
+		<ul>{{#each []}}
+    			<li>{{this.name}} <button id="{{this.name}}" class="wineDelete">x</button></li>
+    		{{/each}}</ul>
+    	</script>
+    	<div id="wineOutputCollection">
+    		
+    	</div>
+    	
+	
 	<!-- 
 		libs to load.
 	-->

@@ -1,0 +1,47 @@
+<html>
+
+<head>
+	<title>test</title>
+	<!-- 
+		libs to load.
+	-->
+	<script type="text/javascript" src="../../../lib/jquery-2.0.0.min.js"></script>
+	<script type="text/javascript" src="../../../lib/underscore-min.js"></script>
+	<script type="text/javascript" src="../../../lib/backbone-min.js"></script>
+	<script type="text/javascript" src="../../../lib/handlebars.js"></script>
+</head>
+
+<body>
+	<!-- 
+		this stuff will get modify by backbone js.
+		wineInputDiv will add whatever you input into a collection.
+		wineList is displaying the collection. 
+	-->
+	<div id="wineInputDiv">
+		<!-- setting the action=# since we dont' have a server-->
+		<form action="#">
+	  		<input type="text" cols="50" id="wineInput"/>
+	  	</form>
+	</div>
+	<div id="wineList">
+		<h3>wines</h3>
+		<ul id="wines"></ul>
+	</div>
+	
+	<!--
+		handle bars test.
+	-->
+	<script id="header1" type="text/x-handlebars-template">
+ 		<p>Hello, my name is {{name}}. I am from {{hometown}}. I have {{kids.length}} kids:</p>
+    	<ul>{{#kids}}
+    		<li>{{name}} is {{age}}</li>
+    	{{/kids}}</ul>
+    </script>
+	
+	<!--
+		your stuff...
+	-->
+	<script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
