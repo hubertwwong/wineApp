@@ -7,29 +7,28 @@
  * */
 app.CViews.WineView = Backbone.View.extend({
 	initialize : function() {
-		// render call the render function.
-		this.render();
 		
 		// event listeners.
 		// collection events. basically listen for a change in collection.
 		// and rerender the changes.
-		this.collection.on('add remove', this.render, this);
+		this.collection.on('add remove change', this.render, this);
+		
+		// render call the render function.
+		this.render();
 	},
 	// view listener.
 	events : {
 		// checks for a click on the class wineDelete is the buttons with the x.
 		// then calls the wineDelete function below.
-		'click' : function(e) {
-			//console.log('removing ' + e.currentTarget.id);
-			console.log("click");
-			// calling a helper that i made in the collection to remove a wine.
-			//var currentWine = this.collection.removeByName(e.currentTarget.id);
+		'click .wineDelete' : function(e) {
+			console.log('removing ' + e.currentTarget.id);
 			
-			// rerender.
-			//this.render();
+			// calling a helper that i made in the collection to remove a wine.
+			var currentWine = this.collection.removeByName(e.currentTarget.id);
 		},
 		// using double click to edit.
 		'dblclick' : function(e) {
+			//var currentItem = $(e.target).val();
 			var currentItem = e;
 			console.log(currentItem);
 		}
@@ -37,7 +36,7 @@ app.CViews.WineView = Backbone.View.extend({
 	render : function() {
 		// clear out the render..
 		this.$el.empty();
-		//this.renderCollection(this.collection, this.$el);
+		this.renderCollection(this.collection, this.$el);
 		
 		// load template.
 		this.renderTemplate(this.collection);
@@ -49,18 +48,31 @@ app.CViews.WineView = Backbone.View.extend({
 	// render helpers.
 	// =======================================================================
 	
+	// appending a view.
+	renderCollection : function (aCollection, elem) {
+		aCollection.each( function(model) {
+			elem.append(
+				'<li>' 
+				+ '<button id="'+ model.get('name') + '" class="wineDelete">x</button>'
+				+ model.get('name') 
+				+ '</li>'
+			);
+			//console.log(model.get('name')); 
+		});
+	},
+	
 	renderTemplate : function(aCollection) {
 		// fetch the template from html file.
 		var src = $('#wineListTemplate').html();
-		//console.log(src);
+		console.log(src);
 		
 		// compile said template.
 		var template = Handlebars.compile(src);
-		//console.log(aCollection.toJSON());
+		console.log(aCollection.toJSON());
 		
 		// pass the compiled template with the data.
 		var result = template(aCollection.toJSON());
-		//console.log(result);
+		console.log(result);
 		
 		// update the results.
 		// hard code the results for now...
