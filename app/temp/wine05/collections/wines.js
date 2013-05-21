@@ -14,11 +14,14 @@ app.CCollections.Wines = Backbone.Collection.extend({
 		this.add(newWine);
 	},
 	// a helper method to remove an item from the collection.
-	removeByName : function(item) {
-		// find wine in the collection
+	removeByName : function(paramName) {
+		// cycle thru collection.
 		var currentWine = this.find(function(item) {
-			console.log(item.get('name'));
-        	return item.get('name');
+			// console.log("item to remove : " + item.get('name') + " | ");
+			// checks for a match for item in the collection.
+			// and the param name.
+			// if it matches, return the left side item.
+			return item.get('name') === paramName;
 		});
 		
 		// remove the wine.

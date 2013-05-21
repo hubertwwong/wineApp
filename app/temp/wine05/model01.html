@@ -20,7 +20,7 @@
 	-->
 	<script id="wineListTemplate" type="text/x-handlebars-template">
 	<ul>{{#each []}}
-			<li>{{this.name}} <button id="{{this.name}}" class="wineDelete">x</button></li>
+			<li id="{{this.name}}">{{this.name}} <button id="{{this.name}}" class="wineDelete">x</button></li>
 		{{/each}}</ul>
 	</script>
 	
@@ -36,13 +36,18 @@
 	<script type="text/javascript" src="../../../lib/backbone-min.js"></script>
 	<script type="text/javascript" src="../../../lib/handlebars.js"></script>
 	
+	<!-- 
+		helper functions
+	-->
+	
+	<script type="text/javascript" src="helpers/templates/HandleBarHelper.js"></script>
+	
 	<!--
 		your stuff...
 	-->
 	<script type="text/javascript" src="init.js"></script>
 	<script type="text/javascript" src="models/wine.js"></script>
 	<script type="text/javascript" src="collections/wines.js"></script>
-	<script type="text/javascript" src="templates/wineListTemplate.js"></script>
 	<script type="text/javascript" src="views/wineView.js"></script>
 	<script type="text/javascript" src="views/wineInput.js"></script>
 	<script type="text/javascript" src="app.js"></script>

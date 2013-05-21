@@ -31,14 +31,9 @@ $(function(){
 	app.Views.wineView = new app.CViews.WineView({
 		collection: app.Collections.wines,
 		templateTag : '#wineListTemplate',
-		outputTag : '#wineOutputCollection',
-		foo: 'hello'
+		outputTag : '#wineOutputCollection'
 	});
 	
-	// handle bars test.
-// ===========================================================================
-
-
 });
 //
 // ========

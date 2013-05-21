@@ -32,18 +32,21 @@ app.CViews.WineView = Backbone.View.extend({
 	events : {
 		// checks for a click on the class wineDelete is the buttons with the x.
 		// then calls the wineDelete function below.
-		'click .wineDelete' : function(e) {
+		'click li .wineDelete' : function(e) {
 			console.log('removing ' + e.currentTarget.id);
+			console.log(e.currentTarget.id);
 			
 			// calling a helper that i made in the collection to remove a wine.
 			var currentWine = this.collection.removeByName(e.currentTarget.id);
 		},
 		// using double click to edit.
-		'dblclick' : function(e) {
+		'dblclick li' : function(e) {
 			//var currentItem = $(e.target).val();
+			console.log("aaaa");
 			var currentItem = e;
 			console.log(currentItem);
-			console.log(currentItem.target);
+			var currentChild = currentItem.currentTarget.id;
+			console.log(currentChild);
 		}
 	},
 	render : function() {
@@ -60,26 +63,7 @@ app.CViews.WineView = Backbone.View.extend({
 	// render helpers.
 	// =======================================================================
 	renderTemplate : function(aCollection) {
-		// fetch the template from html file.
-		//var src = $('#wineListTemplate').html();
-		//console.log(src);
-		
-		// compile said template.
-		//var template = Handlebars.compile(src);
-		//console.log(aCollection.toJSON());
-		
-		// pass the compiled template with the data.
-		//var result = template(aCollection.toJSON());
-		//console.log(result);
-		
-		// update the results.
-		// hard code the results for now...
-		// change it later.
-		//$('#wineOutputCollection').html(result);
-		// handle bars template.
-		
-		// =======================================================================
-		var myWineList = new app.CTemplates.WineList();
+		var myWineList = new HandleBarsHelper();
 		myWineList.init(this.options.templateTag, this.options.outputTag);
 		myWineList.renderHTML(aCollection.toJSON());
 	}
