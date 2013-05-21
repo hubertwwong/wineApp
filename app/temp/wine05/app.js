@@ -1,9 +1,8 @@
-// fleshed out wine01 app a little more.
-// change the objects so they use just one name space.
-// so everything is under the app name space. now.
-// also added a listener to the wine view so it listens to the collection for changes.
-// add some wine objects.
-
+// fleshed out wine04 app a little more.
+// full use of handble bar templates.
+// fixed the delete function.
+// implementing of an update tag.
+//
 $(function(){
 
 	app.Models.firstWine = new app.CModels.Wine({

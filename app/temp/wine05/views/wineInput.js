@@ -17,6 +17,10 @@ app.CViews.WineInput = Backbone.View.extend({
 		this.$el.val('');
 		return this;
 	},
+	
+	// event helpers.
+	// =======================================================================
+	
 	addWineItem : function(e) {
 		// check for enter. if its not that, just return.
 		// otherwise, this function will just keep triggering.
