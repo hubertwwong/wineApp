@@ -12,11 +12,13 @@ var app = app || {};
 app.CModels = {};
 app.CCollections = {};
 app.CViews = {};
+app.CTemplates = {};
 
 // store models that you are newing.
 app.Models = {};
 app.Collections = {};
 app.Views = {};
+app.Templates = {};
 
 // init
 console.log('init app...');

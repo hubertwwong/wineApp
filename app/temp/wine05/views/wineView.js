@@ -9,6 +9,10 @@ app.CViews.WineView = Backbone.View.extend({
 	el: 'ul',
 	id: 'wineList',
 	initialize : function() {
+		console.log('tags');
+		console.log(this.options.templateTag);
+		console.log(this.options.outputTag);
+		
 		// render call the render function.
 		this.render();
 		
@@ -57,21 +61,27 @@ app.CViews.WineView = Backbone.View.extend({
 	// =======================================================================
 	renderTemplate : function(aCollection) {
 		// fetch the template from html file.
-		var src = $('#wineListTemplate').html();
-		console.log(src);
+		//var src = $('#wineListTemplate').html();
+		//console.log(src);
 		
 		// compile said template.
-		var template = Handlebars.compile(src);
-		console.log(aCollection.toJSON());
+		//var template = Handlebars.compile(src);
+		//console.log(aCollection.toJSON());
 		
 		// pass the compiled template with the data.
-		var result = template(aCollection.toJSON());
-		console.log(result);
+		//var result = template(aCollection.toJSON());
+		//console.log(result);
 		
 		// update the results.
 		// hard code the results for now...
 		// change it later.
-		$('#wineOutputCollection').html(result);
+		//$('#wineOutputCollection').html(result);
+		// handle bars template.
+		
+		// =======================================================================
+		var myWineList = new app.CTemplates.WineList();
+		myWineList.init(this.options.templateTag, this.options.outputTag);
+		myWineList.renderHTML(aCollection.toJSON());
 	}
 	
 });
