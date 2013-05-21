@@ -29,8 +29,12 @@ $(function(){
 	});
 	app.Views.wineView = new app.CViews.WineView({
 		collection: app.Collections.wines,
+		el: 'ul',
+		id: 'wineList',
 		templateTag : '#wineListTemplate',
-		outputTag : '#wineOutputCollection'
+		outputTag : '#wineOutputCollection',
+		eventTag: '#wineOutputCollection ul'
+		
 	});
 	
 });

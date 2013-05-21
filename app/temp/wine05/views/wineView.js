@@ -4,10 +4,17 @@
  * 
  * things of note.
  * - need to pass a {collection: collectionObj} when you init the object.
+ * 
+ * options
+ * 
+ * templateTag
+ * - selector that jquery can use to select the script template to compile.
+ * outputTag
+ * - selector that jquery can use to output the results of the template.
+ * eventTag
+ * - selector that backbone uses to bind events.
  * */
 app.CViews.WineView = Backbone.View.extend({
-	el: 'ul',
-	id: 'wineList',
 	initialize : function() {
 		// render call the render function.
 		this.render();
@@ -69,7 +76,7 @@ app.CViews.WineView = Backbone.View.extend({
 	// when you redo the views, you delete the event listeners that were there.
 	// you need to rebind them after you draw the view.
 	rebindViewEvents : function() {
-		this.$el = $('#wineOutputCollection ul');
+		this.$el = $(this.options.eventTag);
 		this.delegateEvents();
 	}
 });
