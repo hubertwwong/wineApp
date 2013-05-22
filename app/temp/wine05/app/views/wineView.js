@@ -49,8 +49,17 @@ app.CViews.WineView = Backbone.View.extend({
 		// clear out the element.
 		this.$el.empty();
 		
+		// add json attribute.
+		// edit : true or edit : false
+		// 
+		var attribName = 'edit';
+		var attribValue = false;
+		var	secondArray = [0];
+		var secondAttrib = true;
+		var aCollectionWithAttrib = JSONInjectHelper.addAttribute2(this.collection.toJSON(), attribName, attribValue, secondArray, secondAttrib);
+		
 		// load template.
-		this.renderTemplate(this.collection);
+		this.renderTemplate(aCollectionWithAttrib);
 		
 		// rebind event listener.s
 		this.rebindViewEvents();
@@ -63,10 +72,10 @@ app.CViews.WineView = Backbone.View.extend({
 	// =======================================================================
 	
 	// uses handble bars to render a the list of wines.
-	renderTemplate : function(aCollection) {
+	renderTemplate : function(jsonCollection) {
 		var myWineList = HandleBarsHelper();
 		myWineList.init(this.options.templateTag, this.options.outputTag);
-		myWineList.renderHTML(aCollection.toJSON());
+		myWineList.renderHTML(jsonCollection);
 	},
 	
 	// event helpers.
@@ -79,15 +88,6 @@ app.CViews.WineView = Backbone.View.extend({
 	rebindViewEvents : function() {
 		this.$el = $(this.options.eventTag);
 		this.delegateEvents();
-	},
-	
-	// JSON view helper.
-	// =======================================================================
-	
-	// adds a json attribute. edit:false to each json in the collection
-	// this is the default.
-	jsonAppendFlag : function(aCollection) {
-		
 	}
 	
 });

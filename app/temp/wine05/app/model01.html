@@ -20,7 +20,11 @@
 	-->
 	<script id="wineListTemplate" type="text/x-handlebars-template">
 	<ul>{{#each []}}
-			<li id="{{this.name}}">{{this.name}} <button id="{{this.name}}" class="wineDelete">x</button></li>
+			{{#if this.edit}}
+				<li id="{{this.name}}">e{{this.name}} <button id="{{this.name}}" class="wineDelete">x</button></li>
+			{{else}}
+				<li id="{{this.name}}">{{this.name}} <button id="{{this.name}}" class="wineDelete">x</button></li>
+			{{/if}}
 		{{/each}}</ul>
 	</script>
 	
@@ -40,6 +44,7 @@
 	-->
 	
 	<script type="text/javascript" src="helpers/templates/HandleBarHelper.js"></script>
+	<script type="text/javascript" src="helpers/json/JSONInjectHelper.js"></script>
 	
 	<!--
 		your stuff...
