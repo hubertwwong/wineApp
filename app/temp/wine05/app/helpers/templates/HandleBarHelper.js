@@ -23,62 +23,64 @@
  * that you specify.
  */
 var HandleBarsHelper = (function () {
-	var template, outputTag, inlineEditTag;
+	var cTemplate, cOutputTag, cInlineEditTag;
 	// templateTag - selector for template. ususally in a script tag.
 	// outputTag - selector for output template. usually a div or list.
+	
+	// note. if you don't specify a param, it will be undefined.
+	var init = function(templateTag, outputTag, inlineEditTag) {
+		cTemplateTag = templateTag;
+		cOutputTag = outputTag;
+		cInlineEditTag = inlineEditTag;
+		//console.log('template init - TemplateTag: ' + templateTag + " OutputTag: " + outputTag + " inlineEditTag " + inlineEditTag);
+	};
+	var renderHTML = function(JSONData) {
+		// consult...
+		console.log("handle bars compile");
+		console.log(JSONData);
+		
+		// fetch the template from html file.
+		var src = $(cTemplateTag).html();
+		
+		// compile said template.
+		var template = Handlebars.compile(src);
+		//console.log(aCollection.toJSON());
+		
+		// pass the compiled template with the data.
+		var outputHTML = template(JSONData);
+		console.log(outputHTML);
+		
+		// update the results.
+		// hard code the results for now...
+		// change it later.
+		return $(cOutputTag).html(outputHTML);
+	};
+	var renderHTML2 = function(JSONData) {
+		// consult...
+		console.log("handle bars compile");
+		console.log(JSONData);
+		
+		// fetch the template from html file.
+		var src = $(cTemplateTag).html();
+		
+		// compile said template.
+		var template = Handlebars.compile(src);
+		//console.log(aCollection.toJSON());
+		
+		// pass the compiled template with the data.
+		var outputHTML = template(JSONData);
+		console.log(outputHTML);
+		
+		// update the results.
+		// hard code the results for now...
+		// change it later.
+		return $(cOutputTag).html(outputHTML);
+	};
+	
+	// public functions.
 	return {
-		init : function(templateTag, outputTag) {
-			//console.log('template init - TemplateTag: ' + templateTag + " OutputTag: " + outputTag);
-			this.templateTag = templateTag;
-			this.outputTag = outputTag;
-		},
-		init : function(templateTag, outputTag, inlineEditTag) {
-			//console.log('template init - TemplateTag: ' + templateTag + " OutputTag: " + outputTag);
-			this.templateTag = templateTag;
-			this.outputTag = outputTag;
-			this.inlineEditTag = inlineEditTag;
-		},
-		renderHTML : function(JSONData) {
-			// consult...
-			console.log("handle bars compile");
-			console.log(JSONData);
-			
-			// fetch the template from html file.
-			var src = $(this.templateTag).html();
-			
-			// compile said template.
-			var template = Handlebars.compile(src);
-			//console.log(aCollection.toJSON());
-			
-			// pass the compiled template with the data.
-			var outputHTML = template(JSONData);
-			console.log(outputHTML);
-			
-			// update the results.
-			// hard code the results for now...
-			// change it later.
-			return $(this.outputTag).html(outputHTML);
-		},
-		renderHTML2 : function(JSONData) {
-			// consult...
-			console.log("handle bars compile");
-			console.log(JSONData);
-			
-			// fetch the template from html file.
-			var src = $(this.templateTag).html();
-			
-			// compile said template.
-			var template = Handlebars.compile(src);
-			//console.log(aCollection.toJSON());
-			
-			// pass the compiled template with the data.
-			var outputHTML = template(JSONData);
-			console.log(outputHTML);
-			
-			// update the results.
-			// hard code the results for now...
-			// change it later.
-			return $(this.outputTag).html(outputHTML);
-		}
+		init : init,
+		renderHTML : renderHTML,
+		renderHTML2 : renderHTML2
 	}
 });

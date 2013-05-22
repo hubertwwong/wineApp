@@ -33,8 +33,7 @@ test("json inject", function() {
 	deepEqual('Clos Pegase', firstWineName, "first wine should be Clos Pegase");
 	
 	// add edit : false attribute.
-	var jsonHelper = new JSONInjectHelper();
-	var wineResult = jsonHelper.addAttribute(wines.toJSON(), attribName, attribValue);
+	var wineResult = JSONInjectHelper.addAttribute(wines.toJSON(), attribName, attribValue);
 	var firstWineAttribute = wineResult[0].edit;
 	deepEqual(false, firstWineAttribute, "after injection, edit attribute should be false");
 });
@@ -72,8 +71,7 @@ test("json inject 2", function() {
 	deepEqual('Clos Pegase', firstWineName, "first wine should be Clos Pegase");
 	
 	// add edit : false attribute.
-	var jsonHelper = new JSONInjectHelper();
-	var wineResult = jsonHelper.addAttributeWith2Attributes(wines.toJSON(), attribName, attribValue, secondaryArray, secondAttrib);
+	var wineResult = JSONInjectHelper.addAttribute2(wines.toJSON(), attribName, attribValue, secondaryArray, secondAttrib);
 	
 	var firstWineAttribute = wineResult[0].edit;
 	var secondWineAttribute = wineResult[1].edit;
