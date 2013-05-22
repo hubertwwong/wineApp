@@ -45,7 +45,7 @@ app.CViews.WineView = Backbone.View.extend({
 		}
 	},
 	render : function() {
-		// clear out the render..
+		// clear out the element.
 		this.$el.empty();
 		
 		// load template.
@@ -78,5 +78,20 @@ app.CViews.WineView = Backbone.View.extend({
 	rebindViewEvents : function() {
 		this.$el = $(this.options.eventTag);
 		this.delegateEvents();
+	},
+	
+	// JSON view helper.
+	// =======================================================================
+	
+	// adds a json attribute. edit:false to each json in the collection
+	// this is the default.
+	jsonDefaultFlags : function(aCollection) {
+		
+	},
+	// adds a json attribute. edit:false to each json in the collection except
+	// for 1 item where edit is true.
+	jsonEditFlags : function (aCollection) {
+		
 	}
+	
 });

@@ -1,8 +1,11 @@
-// fleshed out wine04 app a little more.
-// full use of handble bar templates.
-// fixed the delete function.
-// implementing of an update tag.
-//
+/*
+ * fleshed out wine04 app a little more.
+ * 
+ * full use of handble bar templates.
+ * fixed the delete function.
+ * implementing of an update tag.
+ *
+ */
 $(function(){
 
 	app.Models.firstWine = new app.CModels.Wine({
