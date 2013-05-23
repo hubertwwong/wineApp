@@ -28,5 +28,19 @@ app.CCollections.Wines = Backbone.Collection.extend({
 		// i think this will return an error code if you need it.
 		// not sure.
 		return this.remove(currentWine);
+	},
+	// return the current position of a name.
+	currentPosition : function(paramName) {
+		
+		// cycle thru collection.
+		// return the model in the collection.
+		var currentWine = this.find(function(item) {
+			if(item.get('name') === paramName) {
+				return item;
+			}
+		});
+		
+		// return model
+		return this.indexOf(currentWine);
 	}
 });

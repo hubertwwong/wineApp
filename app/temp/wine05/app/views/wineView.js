@@ -16,6 +16,12 @@
  * */
 app.CViews.WineView = Backbone.View.extend({
 	initialize : function() {
+		// local vars
+		// these are used to store name and position of the variable of
+		// text field when the user updates text. 
+		this.cUpdateText = "";
+		this.cUpdateTextPosition = -1;
+		
 		// render call the render function.
 		this.render();
 		
@@ -35,14 +41,47 @@ app.CViews.WineView = Backbone.View.extend({
 			// calling a helper that i made in the collection to remove a wine.
 			var currentWine = this.collection.removeByName(e.currentTarget.id);
 		},
+		'keypress li .wineCancel' : function(e) {
+			console.log('canceling ' + e.currentTarget.id);
+			this.cUpdateText = "";
+			this.cUpdateTextPosition = -1;
+			
+			//console.log(e.currentTarget.id);
+			
+			// calling a helper that i made in the collection to remove a wine.
+			//var currentWine = this.collection.removeByName(e.currentTarget.id);
+		},
+		'change li .wineUpdate' : function(e) {
+			// check for enter. if its not that, just return.
+			// otherwise, this function will just keep triggering.
+			//if (e.keyCode != 13) return;
+        	
+        	console.log('updating ' + e.currentTarget.id);
+			//console.log(e.currentTarget.id);
+			
+			// calling a helper that i made in the collection to remove a wine.
+			//var currentWine = this.collection.removeByName(e.currentTarget.id);
+		},
 		// using double click to edit.
-		'dblclick li' : function(e) {
+		'dblclick li span' : function(e) {
 			//var currentItem = $(e.target).val();
 			var currentItem = e;
 			console.log(currentItem);
 			console.log(currentItem.currentTarget);
 			var currentChild = currentItem.currentTarget.id;
 			console.log(currentChild);
+			
+			// steps.
+			// 1. stash the text so you know what you are hunting for editing.
+			// 2. stash the position in the collection.
+			// 3. re reender.
+			this.cUpdateText = currentChild;
+			this.cUpdateTextPosition = this.collection.currentPosition(currentChild);
+			//this.cUpdateTextPosition = 
+			console.log("editing " + this.cUpdateText + " at " + this.cUpdateTextPosition);
+			
+			// fire off the render event.
+			this.render();
 		}
 	},
 	render : function() {
@@ -51,11 +90,19 @@ app.CViews.WineView = Backbone.View.extend({
 		
 		// add json attribute.
 		// edit : true or edit : false
-		// 
+		//
 		var attribName = 'edit';
 		var attribValue = false;
-		var	secondArray = [0];
+		var	secondArray = [];
 		var secondAttrib = true;
+		
+		// checks to see if a row is being updated.
+		// it it is,  add the position to the second array.
+		// this values are set in the view event handlers above.
+		if (this.cUpdateTextPosition !== -1) {
+			secondArray = [this.cUpdateTextPosition];
+		}
+		
 		var aCollectionWithAttrib = JSONInjectHelper.addAttribute2(this.collection.toJSON(), attribName, attribValue, secondArray, secondAttrib);
 		
 		// load template.
