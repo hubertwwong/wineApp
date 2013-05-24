@@ -35,8 +35,8 @@ var HandleBarsHelper = (function () {
 	};
 	var renderHTML = function(JSONData) {
 		// consult...
-		console.log("handle bars compile");
-		console.log(JSONData);
+		//console.log("handle bars compile");
+		//console.log(JSONData);
 		
 		// fetch the template from html file.
 		var src = $(cTemplateTag).html();
@@ -47,7 +47,7 @@ var HandleBarsHelper = (function () {
 		
 		// pass the compiled template with the data.
 		var outputHTML = template(JSONData);
-		console.log(outputHTML);
+		//console.log(outputHTML);
 		
 		// update the results.
 		// hard code the results for now...
