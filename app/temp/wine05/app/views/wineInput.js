@@ -11,26 +11,34 @@ app.CViews.WineInput = Backbone.View.extend({
 		this.render();
 	},
 	events: {
-        'keypress': 'addWineItem'
+        'keypress': 'eventWineItemKeyPress'
     },
 	render : function() {
+		// clears out the text box.
 		this.$el.val('');
+		
+		// return this.
+		// allows for chaining.
 		return this;
 	},
 	
-	// event helpers.
+	// event handlers.
 	// =======================================================================
 	
-	addWineItem : function(e) {
+	// checks for a key press function in the input box.
+	// ignore everything except the enter button. '13'.
+	eventWineItemKeyPress : function(e) {
 		// check for enter. if its not that, just return.
 		// otherwise, this function will just keep triggering.
 		if (e.keyCode != 13) return;
         
+        var textBoxName = $(e.target).val();
+        
         // calls the collection add by name. 
-        this.collection.addByName($(e.target).val());
+        this.collection.addByName(textBoxName);
         
         // debug
-		console.log('adding ' + $(e.target).val());
+		console.log('adding ' + textBoxName);
 		
 		// call render this when an item is added.
 		this.render();

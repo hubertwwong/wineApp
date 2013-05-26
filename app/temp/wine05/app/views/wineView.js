@@ -32,97 +32,20 @@ app.CViews.WineView = Backbone.View.extend({
 	},
 	// view listener.
 	events : {
-		// checks for a click on the class wineDelete is the buttons with the x.
-		// then calls the wineDelete function below.
-		'click li .wineDelete' : function(e) {
-			//console.log('removing ' + e.currentTarget.id);
-			//console.log(e.currentTarget.id);
-			
-			// calling a helper that i made in the collection to remove a wine.
-			var currentWine = this.collection.removeByName(e.currentTarget.id);
-		},
-		'click li form .wineCancel' : function(e) {
-			//console.log('canceling ' + e.currentTarget.id);
-			// set the update text variables back to default
-			this.cUpdateText = "";
-			this.cUpdateTextPosition = -1;
-			
-			//console.log(e.currentTarget.id);
-			
-			// calling a helper that i made in the collection to remove a wine.
-			//var currentWine = this.collection.removeByName(e.currentTarget.id);
-			
-			// update render.
-			this.render();
-		},
-		'keypress li .wineUpdate' : function(e) {
-			// check for enter. if its not that, just return.
-			// otherwise, this function will just keep triggering.
-			if (e.keyCode != 13) return;
-        	var newWineName = e.target.value;
-        	
-        	//console.log('updating event fired');
-        	//console.log(e);
-			//console.log(e.keyCode);
-        	//console.log(e.target.value);
-        	
-			//console.log(e.currentTarget.id);
-			
-			// update the collection values.
-			this.collection.updateByName(this.cUpdateText, newWineName);
-			
-			// update the class variables.
-			this.cUpdateText = "";
-			this.cUpdateTextPosition = -1;
-			
-			// call the render again.
-			this.render();
-		},
-		// using double click to edit.
-		'dblclick li span' : function(e) {
-			var currentItem = $(e.target).val();
-			var currentItem = e;
-			//console.log(currentItem);
-			//console.log(currentItem.currentTarget);
-			var currentChild = currentItem.currentTarget.id;
-			//console.log(currentChild);
-			
-			// steps.
-			// 1. stash the text so you know what you are hunting for editing.
-			// 2. stash the position in the collection.
-			// 3. re reender.
-			this.cUpdateText = currentChild;
-			this.cUpdateTextPosition = this.collection.currentPosition(currentChild);
-			//this.cUpdateTextPosition = 
-			//console.log("editing " + this.cUpdateText + " at " + this.cUpdateTextPosition);
-			
-			// fire off the render event.
-			this.render();
-		}
+		'click li .wineDelete' : 'eventWineDelete',
+		'click li form .wineCancel' : 'eventWineCancel',
+		'keypress li .wineUpdate' : 'eventWineUpdate',
+		'dblclick li span' : 'eventDoubleClickText'
 	},
 	render : function() {
 		// clear out the element.
 		this.$el.empty();
 		
-		// add json attribute.
-		// edit : true or edit : false
-		//
-		var attribName = 'edit';
-		var attribValue = false;
-		var	secondArray = [];
-		var secondAttrib = true;
-		
-		// checks to see if a row is being updated.
-		// it it is,  add the position to the second array.
-		// this values are set in the view event handlers above.
-		if (this.cUpdateTextPosition !== -1) {
-			secondArray = [this.cUpdateTextPosition];
-		}
-		
-		var aCollectionWithAttrib = JSONInjectHelper.addAttribute2(this.collection.toJSON(), attribName, attribValue, secondArray, secondAttrib);
+		// inject the edit param to the json collection.
+		var jsonCollectionWithAttrib = this.jsonInjectEditParam(this.collection.toJSON());
 		
 		// load template.
-		this.renderTemplate(aCollectionWithAttrib);
+		this.renderTemplate(jsonCollectionWithAttrib);
 		
 		// rebind event listener.s
 		this.rebindViewEvents();
@@ -141,6 +64,67 @@ app.CViews.WineView = Backbone.View.extend({
 		myWineList.renderHTML(jsonCollection);
 	},
 	
+	// event listeners
+	// =======================================================================
+	
+	// checks for a click on the class wineDelete is the buttons with the x.
+	// then calls the wineDelete function below.	
+	eventWineDelete : function(e) {
+		//console.log('removing ' + e.currentTarget.id);
+		//console.log(e.currentTarget.id);
+			
+		// calling a helper that i made in the collection to remove a wine.
+		var currentWine = this.collection.removeByName(e.currentTarget.id);
+	},
+	
+	// checks to a click on the 'c' cancel button.
+	// basically sets back the class variables to its default
+	// and calls render function.
+	eventWineCancel : function(e) {
+		//console.log('canceling ' + e.currentTarget.id);
+		// set the update text variables back to default
+		this.cUpdateText = "";
+		this.cUpdateTextPosition = -1;
+		
+		// update render.
+		this.render();
+	},
+	
+	// this checks key presses on the update field.
+	// filters out all except the enter key.
+	eventWineUpdate : function(e) {
+		// check for enter. if its not that, just return.
+		// otherwise, this function will just keep triggering.
+		if (e.keyCode != 13) return;
+    	var newWineName = e.target.value;
+    	
+		// update the collection values.
+		this.collection.updateByName(this.cUpdateText, newWineName);
+		
+		// update the class variables to its default values.
+		this.cUpdateText = "";
+		this.cUpdateTextPosition = -1;
+		
+		// call the render again.
+		this.render();
+	},
+	
+	// using double click to edit.
+	// convert the text you double click into a text field.		
+	eventDoubleClickText :function(e) {
+		var currentItem = e;
+		var currentChild = currentItem.currentTarget.id;
+		
+		// update class variables.
+		// after that call the render function again.
+		// render function checks the class variables to see if you double clicked.
+		this.cUpdateText = currentChild;
+		this.cUpdateTextPosition = this.collection.currentPosition(currentChild);
+		
+		// fire off the render event.
+		this.render();
+	},
+	
 	// event helpers.
 	// =======================================================================
 	
@@ -151,6 +135,36 @@ app.CViews.WineView = Backbone.View.extend({
 	rebindViewEvents : function() {
 		this.$el = $(this.options.eventTag);
 		this.delegateEvents();
+	},
+	
+	// JSON helpers
+	// =======================================================================
+	
+	// a simpler helper that updates the collection with an extra attribute.
+	// attribute is called edit.
+	// its either true or false.
+	// defaults to false.
+	// if its true, the handlebar template will pick it up and render a text box.
+	// instead of normal text.
+	jsonInjectEditParam : function(jsonCollection) {
+		// add json attribute.
+		// edit : true or edit : false
+		//
+		var attribName = 'edit';
+		var attribValue = false;
+		var	secondArray = [];
+		var secondAttrib = true;
+		
+		// checks to see if a row is being updated.
+		// it it is,  add the position to the second array.
+		// this values are set in the view event handlers above.
+		if (this.cUpdateTextPosition !== -1) {
+			secondArray = [this.cUpdateTextPosition];
+		}
+		
+		/// return the collection
+		var aCollectionWithAttrib = JSONInjectHelper.addAttribute2(jsonCollection, attribName, attribValue, secondArray, secondAttrib);
+		return aCollectionWithAttrib;
 	}
 	
 });

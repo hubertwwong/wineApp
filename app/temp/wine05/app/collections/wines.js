@@ -50,51 +50,18 @@ app.CCollections.Wines = Backbone.Collection.extend({
 		var updateCollection = [];
 		
 		// cycle thru collection.
-		var currentWine = this.find(function(item, index) {
-			// console.log("item to remove : " + item.get('name') + " | ");
-			// checks for a match for item in the collection.
-			// and the param name.
-			// if it matches, return the left side item.
-			console.log(index);
+		var currentWine = this.find(function(item) {
+			// check if the model that you fetched is correct.
 			if (item.get('name') === paramName) {
-				item.set({'name' : paramName});
-				//this.set = {index: item};
-				//return item;
-				updateCollection.push(new app.CModels.Wine({'name' : newParamName}));
+				// update the name attribute to what you set it to be.
+				item.set({'name' : newParamName});
+
+				// return updated model.
+				// probably not needed. but you can use it to debug if needed.
+				return item;
 			}
-			else {
-				updateCollection.push(item);
-			}
 		});
 		
-		_.each(this, function(item) {
-			console.log("popping");
-			console.log(item);
-			self.pop();
-		});
-		_.each(updateCollection, function(item) {
-			console.log("pushing");
-			console.log(item);
-			self.push(item);
-		});
-		
-		// checking results.
-		console.log(self);
-		console.log(this);
-		
-		// update
-		//console.log(wineIndex);
-		
-		console.log("wine collection");
-		//this.set(updateCollection);
-		//console.log(this);
-		
-		// testing push.
-		//this.push(new app.CModels.Wine({'name' : 'foo'}))
-		
-		// remove the wine.
-		// i think this will return an error code if you need it.
-		// not sure.
 		return currentWine;
 	}
 	
