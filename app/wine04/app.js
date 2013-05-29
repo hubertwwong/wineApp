@@ -25,6 +25,7 @@ $(function(){
 	
 	// app view.
 	// =======================================================================
+	
 	app.Views.wineView = new app.CViews.WineView({
 		collection: app.Collections.wines,
 		el: 'ul',
@@ -35,8 +36,7 @@ $(function(){
 		el: 'input',
 		id: 'wineInput'
 	});
-
-
+	
 });
 //
 // ========
