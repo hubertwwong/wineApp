@@ -1,0 +1,68 @@
+<html>
+
+<head>
+	<title>test</title>
+</head>
+
+<body>
+	<!-- 
+		wine input.
+	-->
+	<div id="wineInputDiv">
+		<!-- setting the action=# since we dont' have a server-->
+		<form action="#">
+	  		<input type="text" cols="50" id="wineInput"/>
+	  	</form>
+	</div>
+	
+	<!-- 
+		winelist with handlebars template.
+	-->
+	<script id="wineListTemplate" type="text/x-handlebars-template">
+	<ul>{{#each []}}
+			{{#if this.edit}}
+				<li id="{{this.name}}">
+					<form action="#">
+	  					<input type="text" cols="50" class="wineUpdate" value="{{this.name}}"/>
+	  					<button id="{{this.name}}" class="wineCancel">c</button>
+	  				</form>
+				</li>
+			{{else}}
+				<li id="{{this.name}}">
+					<span id="{{this.name}}">{{this.name}}</span> 
+					<button id="{{this.name}}" class="wineDelete">x</button>
+				</li>
+			{{/if}}
+		{{/each}}</ul>
+	</script>
+	
+	<div id="wineOutputCollection">
+	</div>
+    
+	<!-- 
+		libs to load.
+	-->
+	<script type="text/javascript" src="../../../lib/jquery-2.0.0.min.js"></script>
+	<script type="text/javascript" src="../../../lib/underscore-min.js"></script>
+	<script type="text/javascript" src="../../../lib/backbone-min.js"></script>
+	<script type="text/javascript" src="../../../lib/handlebars.js"></script>
+	
+	<!-- 
+		helper functions
+	-->
+	
+	<script type="text/javascript" src="helpers/templates/HandleBarHelper.js"></script>
+	<script type="text/javascript" src="helpers/json/JSONInjectHelper.js"></script>
+	
+	<!--
+		your stuff...
+	-->
+	<script type="text/javascript" src="init.js"></script>
+	<script type="text/javascript" src="models/wine.js"></script>
+	<script type="text/javascript" src="collections/wines.js"></script>
+	<script type="text/javascript" src="views/wineView.js"></script>
+	<script type="text/javascript" src="views/wineInput.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
