@@ -1,7 +1,9 @@
 # wineApp
 
 A series of test apps to learn backbone js. I added some features and copied
-and pasted into a different directory.
+and pasted into a different directory to sort have a history on the mistakes
+and issues that i'm running into and to learn from each step in the process
+of learning javascript.
 
 
 
