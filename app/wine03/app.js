@@ -1,10 +1,10 @@
-// fleshed out wine01 app a little more.
+// fleshed out wine03 app a little more.
 // change the objects so they use just one name space.
 // so everything is under the app name space. now.
 // also added a listener to the wine view so it listens to the collection for changes.
 
 // init the wine app.
-//$(document).ready(function() {
+$(document).ready(function() {
 
 console.log('adding some test wines.');
 	
@@ -26,6 +26,7 @@ app.Collections.wines.add(app.Models.secondWine);
 
 // app view.
 // =======================================================================
+
 app.Views.wineView = new app.CViews.WineView({
 	collection: app.Collections.wines,
 	el: 'ul',
@@ -37,4 +38,4 @@ app.Views.wineInput = new app.CViews.WineInput({
 	id: 'wineInput'
 });
 	
-//}); 
+}); 
