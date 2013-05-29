@@ -10,12 +10,14 @@ and pasted into a different directory.
 ##### Description of apps.
 
 
-1. wine01:
+###### wine01:
+
 Tried to get a basic backbone app up and running. Tried structing the code
 into seperate files and tried to get something out on the browser.
 
 
-2. wine02:
+###### wine02:
+
 Restructured wine01 a little. Realized that backbone apps needed to be
 created with new statement so I created the classes in its own object.
 So app.CModel.Wine would be a wine model. You can init it and store it
@@ -23,12 +25,14 @@ int app.Model.someWine. I'm using using the app object as a name space
 so it doesn't pollute the name space everything. 
 
 
-3. wine03:
+###### wine03:
+
 Moved the list of wines to a li item list and put an input field that you
 actually add some wines into the list.
 
 
-4. wine04: (broken)
+###### wine04: (broken)
+
 I think a combination of git and google drive corrupted this. I don't feel
 like fixing a throwaway project to learn. But it had a delete button that
 would remove wines from the list. I was going to put in update function
@@ -39,7 +43,8 @@ other templates systems had {{}} directives that seem to work out better.
 I picked handlebars since that what everyone seems to be using.
 
 
-5. wine05:
+###### wine05:
+
 Decided to use handle bars and added a simple handle bars template for
 wine view. So now if you double click on the text field, you can edit and
 update the field. Also added some collection code logic to handle this
@@ -55,5 +60,6 @@ can pick it up and use it to determine what field the user what updating.
 Added test cases for the helpers. Using QUnit since that seemed to be
 the easiest test system to try out.
 
-6. wine06:
+###### wine06:
+
 probably want to fix a bug.
